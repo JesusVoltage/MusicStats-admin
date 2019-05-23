@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "music";
+
+@import "bootstrap/bootstrap";
+@import "spinner";
+@import "utils";
+@import "rtl";
+@import "responsive";
+
+@media print {
+    .breadcrumb {
+        display: none !important;
+    }
+}
+
+
+//variables de Music Stats
+$blue-dark: #075C98;
+$blue-light: #1791e5;
