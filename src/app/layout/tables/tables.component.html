@@ -1,353 +1,108 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Tables'" [icon]="'fa-table'"></app-page-header>
+    <app-page-header [icon]="'fa-users'"></app-page-header>
     <div class="row">
-        <div class="col col-xl-6 col-lg-12">
-            <div class="card mb-3">
-                <div class="card-header">
-                    Basic example
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-12">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="align-middle">
+                        <a class="navbar-brand bold">Usuarios</a>
+                    </div>
+                    <div>
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            Crear nuevo usuario
+                        </button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content p-3">
+
+                                    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+
+                                        <div class="d-flex flex-column">
+
+                                            <div class="input-container justify-content-center">
+                                                <h6>Nombre</h6>
+                                                <input class="form-control" type="text" name="nombre" #nombre="ngModel"
+                                                    [(ngModel)]="userService.selectedUser.nombre">
+                                            </div>
+
+                                            <div class="input-container justify-content-centerr">
+                                                <h6>Apellidos</h6>
+                                                <input class="form-control" type="text" name="apellidos"
+                                                    #apellidos="ngModel"
+                                                    [(ngModel)]="userService.selectedUser.apellidos">
+                                            </div>
+
+                                            <div class="input-container justify-content-centerr">
+                                                <h6>Correo Electrónico</h6>
+                                                <input class="form-control" type="text" name="correo" #correo="ngModel"
+                                                    [(ngModel)]="userService.selectedUser.correo">
+                                            </div>
+
+                                            <div class="input-container justify-content-centerr">
+                                                <h6>Nombre de usuario</h6>
+                                                <input class="form-control" type="text" name="username"
+                                                    #username="ngModel" [(ngModel)]="userService.selectedUser.username">
+                                            </div>
+
+                                            <div class="input-container justify-content-centerr">
+                                                <h6>contraseña</h6>
+                                                <input class="form-control" type="text" name="password"
+                                                    #password="ngModel" [(ngModel)]="userService.selectedUser.password">
+                                            </div>
+
+                                            <div class="input-container justify-content-centerr">
+                                                <h6>Verificado</h6>
+                                                <input class="form-control" type="checkbox" name="verificado"
+                                                    #verificado="ngModel"
+                                                    [(ngModel)]="userService.selectedUser.verificado">
+                                            </div>
+
+
+                                            <div class="button-container align-self-end">
+                                                <button class="btn btn-dark">Crear nuevo usuario</button>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
+                            <tr>
+                                <th>id</th>
+                                <th>nombre</th>
+                                <th>apellidos</th>
+                                <th class="text-center">Borrar</th>
+                                <th class="text-center">Editar</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                            <tr *ngFor="let user of users">
+                                <th>{{user._id}}</th>
+                                <th>{{user.nombre}}</th>
+                                <th>{{user.apellidos}}</th>
+                                <th class="text-center"><i class="fa fa-trash" (click)="deleteUser(this.user._id)"></i>
+                                </th>
+                                <th class="text-center"><i class="fa fa-edit" (click)="deleteUser(this.user._id)"></i>
+                                </th>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Table head options</div>
-                <div class="card-body table-responsive">
-                    <table class="table">
-                        <thead class="thead-inverse">
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table class="table">
-                        <thead class="thead-default">
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Bordered table</div>
-                <div class="card-body table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@TwBootstrap</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Small table</div>
-                <table class="table table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col col-xl-6 col-lg-12">
-            <div class="card mb-3">
-                <div class="card-header">Inverse table</div>
-                <div class="card-body table-responsive">
-                    <table class="table table-inverse">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Striped Rows</div>
-                <div class="card-body table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>Page</th>
-                            <th>Visits</th>
-                            <th>% New Visits</th>
-                            <th>Revenue</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>/index.html</td>
-                            <td>1265</td>
-                            <td>32.3%</td>
-                            <td>$321.33</td>
-                        </tr>
-                        <tr>
-                            <td>/about.html</td>
-                            <td>261</td>
-                            <td>33.3%</td>
-                            <td>$234.12</td>
-                        </tr>
-                        <tr>
-                            <td>/sales.html</td>
-                            <td>665</td>
-                            <td>21.3%</td>
-                            <td>$16.34</td>
-                        </tr>
-                        <tr>
-                            <td>/blog.html</td>
-                            <td>9516</td>
-                            <td>89.3%</td>
-                            <td>$1644.43</td>
-                        </tr>
-                        <tr>
-                            <td>/404.html</td>
-                            <td>23</td>
-                            <td>34.3%</td>
-                            <td>$23.52</td>
-                        </tr>
-                        <tr>
-                            <td>/services.html</td>
-                            <td>421</td>
-                            <td>60.3%</td>
-                            <td>$724.32</td>
-                        </tr>
-                        <tr>
-                            <td>/blog/post.html</td>
-                            <td>1233</td>
-                            <td>93.2%</td>
-                            <td>$126.34</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Hoverable rows</div>
-                <table class="card-body table table-hover">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Contextual classes</div>
-                <table class="card-body table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="table-active">
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr class="table-success">
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr class="table-info">
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr class="table-warning">
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr class="table-danger">
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

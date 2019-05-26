@@ -9,10 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
+import { FormsModule , ReactiveFormsModule }   from '@angular/forms';
+
+
 @NgModule({
     imports: [
         CommonModule,
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
         LanguageTranslationModule,

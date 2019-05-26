@@ -1,17 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
-    animations: [routerTransition()]
+    animations: [routerTransition()],
+    providers: [UserService]
 })
 export class DashboardComponent implements OnInit {
+    
+    private numUsers: any;
+    
+    
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
 
-    constructor() {
+
+
+
+    constructor(private userService: UserService) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -52,7 +62,16 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.getUserData();
+  }
+
+    getUserData(){
+        this.userService.getUserNum().subscribe(res =>{
+            this.numUsers = res;
+        })
+    }
+
 
     public closeAlert(alert: any) {
         const index: number = this.alerts.indexOf(alert);
